@@ -29,8 +29,10 @@ TinyRadius build file
 	
 	<target name="clean">
 		<delete dir="${build}"/>
+		<delete dir="${dist}"/>
+		<delete dir="doc/apidoc"/>
 	</target>
-	
+
 	<target name="javadoc" depends="compile">
 		<javadoc destdir="doc/apidoc"
 			access="protected" 
