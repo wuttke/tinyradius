@@ -42,10 +42,10 @@ public class TestServer {
 			}
 			
 			// Adds an attribute to the Access-Accept packet
-			public RadiusPacket accessRequestReceived(AccessRequest accessRequest) 
+			public RadiusPacket accessRequestReceived(AccessRequest accessRequest, InetAddress client) 
 			throws RadiusException {
 				System.out.println("Received Access-Request:\n" + accessRequest);
-				RadiusPacket packet = super.accessRequestReceived(accessRequest);
+				RadiusPacket packet = super.accessRequestReceived(accessRequest, client);
 				if (packet.getPacketType() == RadiusPacket.ACCESS_ACCEPT)
 					packet.addAttribute(new StringAttribute(18, "Welcome " + accessRequest.getUserName() + "!"));
 			
