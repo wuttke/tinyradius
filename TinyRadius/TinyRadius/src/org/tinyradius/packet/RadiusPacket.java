@@ -204,7 +204,7 @@ public class RadiusPacket {
 		if (type == null)
 			throw new IllegalArgumentException("unknown attribute type '" + typeName + "'");
 		
-		RadiusAttribute attribute = RadiusAttribute.createRadiusAttribute(type.getCode());
+		RadiusAttribute attribute = RadiusAttribute.createRadiusAttribute(type.getTypeCode());
 		attribute.setAttributeValue(value);
 		addAttribute(attribute);
 	}
@@ -295,7 +295,7 @@ public class RadiusPacket {
 		if (t == null)
 			throw new IllegalArgumentException("unknown attribute type name '" + type + "'");
 		
-		RadiusAttribute attr = getAttribute(t.getCode());
+		RadiusAttribute attr = getAttribute(t.getTypeCode());
 		if (attr == null)
 			return null;
 		else
@@ -319,7 +319,7 @@ public class RadiusPacket {
 		if (t == null)
 			throw new IllegalArgumentException("unknown attribute type name '" + type + "'");
 		
-		RadiusAttribute attr = getAttribute(t.getCode());
+		RadiusAttribute attr = getAttribute(t.getTypeCode());
 		if (attr == null)
 			return null;
 		else

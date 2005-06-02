@@ -43,6 +43,7 @@ public class IntegerAttribute extends RadiusAttribute {
 	
 	/**
 	 * Returns the value of this attribute as a string.
+	 * Tries to resolve enumerations.
 	 * @see org.tinyradius.attribute.RadiusAttribute#getAttributeValue()
 	 */
 	public String getAttributeValue() {
