@@ -616,7 +616,7 @@ public class RadiusPacket {
 		int length = in.read() << 8 | in.read();
 	
 		if (request != null && request.getPacketIdentifier() != identifier)
-			throw new RadiusException("bad packet: invalid packet identifier");
+			throw new RadiusException("bad packet: invalid packet identifier (request: " + request.getPacketIdentifier() + ", response: " + identifier);
 		if (length < RADIUS_HEADER_LENGTH)
 			throw new RadiusException("bad packet: packet too short (" + length + " bytes)");
 		if (length > MAX_PACKET_LENGTH)
