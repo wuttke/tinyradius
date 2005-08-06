@@ -37,7 +37,7 @@ public class IntegerAttribute extends RadiusAttribute {
 	 */
 	public int getAttributeValueInt() {
 		byte[] data = getAttributeData();
-		return (int)(((data[0] & 0x0ff) << 24) | ((data[1] & 0x0ff) << 16) | 
+		return (((data[0] & 0x0ff) << 24) | ((data[1] & 0x0ff) << 16) | 
 				((data[2] & 0x0ff) << 8) | (data[3] & 0x0ff));
 	}
 	
