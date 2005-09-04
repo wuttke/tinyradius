@@ -8,11 +8,13 @@
  * @author Matthias Wuttke
  * @version $Revision$
  */
-package org.tinyradius.attribute;
+package org.tinyradius.dictionary;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
+import org.tinyradius.attribute.RadiusAttribute;
 
 /**
  * Represents a Radius attribute type.
@@ -21,9 +23,10 @@ public class AttributeType {
 
 	/**
 	 * Create a new attribute type.
-	 * @param code
-	 * @param name
-	 * @param type
+	 * @param code Radius attribute type code
+	 * @param name Attribute type name
+	 * @param type RadiusAttribute descendant who handles
+	 * attributes of this type
 	 */
 	public AttributeType(int code, String name, Class type) {
 		setTypeCode(code);
@@ -34,7 +37,7 @@ public class AttributeType {
 	/**
 	 * Constructs a Vendor-Specific sub-attribute type.
 	 * @param vendor vendor ID
-	 * @param code sub-attribute type
+	 * @param code sub-attribute type code
 	 * @param name sub-attribute name
 	 * @param type sub-attribute class
 	 */
@@ -93,18 +96,18 @@ public class AttributeType {
 	/**
 	 * Sets the RadiusAttribute descendant class which represents
 	 * attributes of this type.
-	 * @return class
 	 */
 	public void setAttributeClass(Class type) {
 		if (type == null)
 			throw new NullPointerException("type is null");
-		if (type.isInstance(RadiusAttribute.class))
+		if (!RadiusAttribute.class.isAssignableFrom(type))
 			throw new IllegalArgumentException("type is not a RadiusAttribute descendant");
 		this.attributeClass = type;
 	}
 		
 	/**
 	 * Returns the vendor ID.
+	 * No vendor specific attribute = -1 
 	 * @return vendor ID
 	 */
 	public int getVendorId() {

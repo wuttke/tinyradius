@@ -193,7 +193,7 @@ public abstract class RadiusServer {
 	 * A packet is discarded as a duplicate if in the duplicate interval
 	 * there was another packet with the same identifier originating from the
 	 * same address.
-	 * @return duplicate interval
+	 * @return duplicate interval (ms)
 	 */
 	public long getDuplicateInterval() {
 		return duplicateInterval;
@@ -204,7 +204,7 @@ public abstract class RadiusServer {
 	 * A packet is discarded as a duplicate if in the duplicate interval
 	 * there was another packet with the same identifier originating from the
 	 * same address.
-	 * @param duplicateInterval duplicate interval, >0
+	 * @param duplicateInterval duplicate interval (ms), >0
 	 */
 	public void setDuplicateInterval(long duplicateInterval) {
 		if (duplicateInterval <= 0)

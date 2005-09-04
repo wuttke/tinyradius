@@ -6,6 +6,7 @@
  */
 package org.tinyradius.attribute;
 
+import org.tinyradius.dictionary.AttributeType;
 import org.tinyradius.util.RadiusException;
 
 /**

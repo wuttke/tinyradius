@@ -92,6 +92,20 @@ public class IpAttribute extends RadiusAttribute {
 		return ((long)(data[0] & 0x0ff)) << 24 | (data[1] & 0x0ff) << 16 |
 			   (data[2] & 0x0ff) << 8 | (data[3] & 0x0ff);
 	}
+	
+	/**
+	 * Sets the IP number represented by this IpAttribute
+	 * as a 32 bit unsigned number.
+	 * @param ip
+	 */
+	public void setIpAsLong(long ip) {
+		byte[] data = new byte[4];
+		data[0] = (byte)((ip >> 24) & 0x0ff);
+		data[1] = (byte)((ip >> 16) & 0x0ff);
+		data[2] = (byte)((ip >> 8) & 0x0ff);
+		data[3] = (byte)(ip & 0x0ff);
+		setAttributeData(data);
+	}
 
 	/**
 	 * Check attribute length.

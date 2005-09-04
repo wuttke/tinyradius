@@ -9,7 +9,7 @@ TinyRadius build file
 	<property name="src" location="src"/>
 	<property name="build" location="build"/>
 	<property name="dist" location="dist"/>
-	<property name="version" value="0.9.3"/>
+	<property name="version" value="0.9.4"/>
 	<property name="classpath" value="lib/commons-logging.jar"/>
 	
 	<target name="init">
@@ -39,7 +39,7 @@ TinyRadius build file
 			use="true" notree="false" nonavbar="false" noindex="false"
 			splitindex="true" author="true" version="true"
 			nodeprecatedlist="false" nodeprecated="false"
-			packagenames="org.tinyradius.packet,org.tinyradius.util,org.tinyradius.test,org.tinyradius.attribute"
+			packagenames="org.tinyradius.packet,org.tinyradius.util,org.tinyradius.test,org.tinyradius.attribute,org.tinyradius.dictionary"
 			sourcepath="${src}" classpath="${build}:${classpath}"
 			doctitle="TinyRadius: Java Radius Library"
 			additionalparam=" -encoding iso-8859-1 -docencoding iso-8859-1 -charset iso-8859-1"/>
