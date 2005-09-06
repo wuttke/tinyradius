@@ -23,7 +23,7 @@ TinyRadius build file
 
     <target name="jar" depends="compile">
 	    <mkdir dir="${dist}"/>
-    	<copy file="${src}/org/tinyradius/attribute/dictionary" todir="${build}/org/tinyradius/attribute"/>
+    	<copy file="${src}/org/tinyradius/dictionary/default_dictionary" todir="${build}/org/tinyradius/attribute"/>
         <jar jarfile="${dist}/TinyRadius-${version}.jar" basedir="${build}"/>
     </target>
 	
