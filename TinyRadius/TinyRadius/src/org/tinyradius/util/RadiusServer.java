@@ -213,10 +213,31 @@ public abstract class RadiusServer {
 	}
 	
 	/**
+	 * Returns the IP address the server listens on.
+	 * Returns null if listening on the wildcard address.
+	 * @return listen address or null
+	 */
+	public InetAddress getListenAddress() {
+		return listenAddress;
+	}
+	
+	/**
+	 * Sets the address the server listens on.
+	 * Must be called before start().
+	 * Defaults to null, meaning listen on every
+	 * local address (wildcard address).
+	 * @param listenAddress listen address or null
+	 */
+	public void setListenAddress(InetAddress listenAddress) {
+		this.listenAddress = listenAddress;
+	}
+	
+	/**
 	 * Listens on the auth port (blocks the current thread).
 	 * Returns when stop() is called.
 	 * @throws SocketException
 	 * @throws InterruptedException
+	 * 
 	 */
 	protected void listenAuth()
 	throws SocketException {
@@ -312,8 +333,12 @@ public abstract class RadiusServer {
 	protected DatagramSocket getAuthSocket() 
 	throws SocketException {
 		if (authSocket == null) {
-			authSocket = new DatagramSocket(getAuthPort());
+			if (getListenAddress() == null)
+				authSocket = new DatagramSocket(getAuthPort());
+			else
+				authSocket = new DatagramSocket(getAuthPort(), getListenAddress());
 			authSocket.setSoTimeout(getSocketTimeout());
+			
 		}
 		return authSocket;
 	}
@@ -326,7 +351,10 @@ public abstract class RadiusServer {
 	protected DatagramSocket getAcctSocket() 
 	throws SocketException {
 		if (acctSocket == null) {
-			acctSocket = new DatagramSocket(getAcctPort());
+			if (getListenAddress() == null)
+				acctSocket = new DatagramSocket(getAcctPort());
+			else
+				acctSocket = new DatagramSocket(getAcctPort(), getListenAddress());
 			acctSocket.setSoTimeout(getSocketTimeout());
 		}
 		return acctSocket;
@@ -400,7 +428,8 @@ public abstract class RadiusServer {
 		receivedPackets.add(rp);
 		return false;
 	}
-	
+
+	private InetAddress listenAddress = null;
 	private int authPort = 1812;
 	private int acctPort = 1813;
 	private DatagramSocket authSocket = null;

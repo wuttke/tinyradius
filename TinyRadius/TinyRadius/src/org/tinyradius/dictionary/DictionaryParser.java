@@ -27,6 +27,20 @@ import org.tinyradius.attribute.VendorSpecificAttribute;
 public class DictionaryParser {
 
 	/**
+	 * Returns a new dictionary filled with the contents
+	 * from the given input stream.
+	 * @param source input stream
+	 * @return dictionary object
+	 * @throws IOException
+	 */
+	public static Dictionary parseDictionary(InputStream source) 
+	throws IOException {
+		WritableDictionary d = new MemoryDictionary();
+		parseDictionary(source, d);
+		return d;
+	}
+	
+	/**
 	 * Parses the dictionary from the specified InputStream.
 	 * @param source input stream
 	 * @param dictionary dictionary data is written to

@@ -187,6 +187,7 @@ public class RadiusPacket {
 	public void addAttribute(RadiusAttribute attribute) {
 		if (attribute == null)
 			throw new NullPointerException("attribute is null");
+		attribute.setDictionary(getDictionary());
 		if (attribute.getVendorId() == -1)
 			this.attributes.add(attribute);
 		else {

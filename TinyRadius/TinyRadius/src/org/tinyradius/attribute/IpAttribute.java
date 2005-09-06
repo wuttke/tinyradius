@@ -33,6 +33,16 @@ public class IpAttribute extends RadiusAttribute {
 	}
 	
 	/**
+	 * Constructs an IP attribute.
+	 * @param type attribute type code
+	 * @param ipNum value as a 32 bit unsigned int
+	 */
+	public IpAttribute(int type, long ipNum) {
+		setAttributeType(type);
+		setIpAsLong(ipNum);
+	}
+	
+	/**
 	 * Returns the attribute value (IP number) as a string of the
 	 * format "xx.xx.xx.xx".
 	 * @see org.tinyradius.attribute.RadiusAttribute#getAttributeValue()

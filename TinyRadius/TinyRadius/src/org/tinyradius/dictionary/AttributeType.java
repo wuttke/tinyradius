@@ -167,6 +167,21 @@ public class AttributeType {
 		enumeration.put(new Integer(num), name);
 	}
 	
+	/**
+	 * String representation of AttributeType object
+	 * for debugging purposes.
+	 * @return string
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		String s = getTypeCode() + 
+			"/" + getName() +
+			": " + attributeClass.getSimpleName();
+		if (getVendorId() != -1)
+			s += " (vendor " + getVendorId() + ")";
+		return s;
+	}
+	
 	private int vendorId = -1;
 	private int typeCode;
 	private String name;
