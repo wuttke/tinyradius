@@ -56,6 +56,31 @@ TinyRadius build file
 		<gzip zipfile="${dist}/TinyRadius-${version}.tar.gz" src="${dist}/TinyRadius-${version}.tar"/>
 		<delete file="${dist}/TinyRadius-${version}.tar"/>
 	</target>
+	
+	<target name="sourceforge" depends="dist">
+	    <ftp server="upload.sourceforge.net"
+	         remotedir="incoming"
+	         userid="anonymous"
+	         password=""
+	         verbose="yes"
+	         passive="yes">
+	    	<fileset file="${dist}/TinyRadius-${version}.tar.gz"/>
+	    </ftp>
+	</target>
+	
+	<!-- requires the passphrase of the SSH private key
+	to be cached in the SSH agent -->
+	<target name="website" depends="javadoc">
+		<exec executable="scp">
+			<arg line="-r"/>
+			<arg line="doc/apidoc"/>
+			<arg line="wuttke@tinyradius.sf.net:/home/groups/t/ti/tinyradius/htdocs"/>
+		</exec>
+		<exec executable="scp">
+			<arg line="doc/tinyradius.html"/>
+			<arg line="wuttke@tinyradius.sf.net:/home/groups/t/ti/tinyradius/htdocs/index.html"/>
+		</exec>
+	</target>
 
 </project>
 

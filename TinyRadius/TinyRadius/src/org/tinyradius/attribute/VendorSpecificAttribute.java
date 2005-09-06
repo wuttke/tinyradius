@@ -54,7 +54,7 @@ public class VendorSpecificAttribute extends RadiusAttribute {
 	
 	/**
 	 * Returns the vendor ID of the sub-attributes.
-	 * @return
+	 * @return vendor ID of sub attributes
 	 */
 	public int getChildVendorId() {
 		return childVendorId;

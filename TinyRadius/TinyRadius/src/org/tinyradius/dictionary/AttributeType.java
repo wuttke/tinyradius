@@ -176,7 +176,7 @@ public class AttributeType {
 	public String toString() {
 		String s = getTypeCode() + 
 			"/" + getName() +
-			": " + attributeClass.getSimpleName();
+			": " + attributeClass.getName();
 		if (getVendorId() != -1)
 			s += " (vendor " + getVendorId() + ")";
 		return s;
