@@ -220,21 +220,6 @@ public class RadiusClient {
 	}
 	
 	/**
-	 * Returns the socket used for the server communication. It is
-	 * bound to an arbitrary free local port number.
-	 * @return local socket
-	 * @throws SocketException
-	 */
-	protected DatagramSocket getSocket() 
-	throws SocketException {
-		if (socket == null) {
-			socket = new DatagramSocket();
-			socket.setSoTimeout(getSocketTimeout());
-		}
-		return socket;
-	}
-	
-	/**
 	 * Sends a Radius packet to the server and awaits an answer.
 	 * @param request packet to be sent
 	 * @param port server port number
@@ -243,7 +228,7 @@ public class RadiusClient {
 	 * @exception IOException communication error (after getRetryCount()
 	 * retries)
 	 */
-	protected RadiusPacket communicate(RadiusPacket request, int port) 
+	public RadiusPacket communicate(RadiusPacket request, int port) 
 	throws IOException, RadiusException {
 		DatagramPacket packetIn = new DatagramPacket(new byte[RadiusPacket.MAX_PACKET_LENGTH], RadiusPacket.MAX_PACKET_LENGTH);
 		DatagramPacket packetOut = makeDatagramPacket(request, port);
@@ -269,6 +254,21 @@ public class RadiusClient {
         }
 		
 		return null;
+	}
+
+	/**
+	 * Returns the socket used for the server communication. It is
+	 * bound to an arbitrary free local port number.
+	 * @return local socket
+	 * @throws SocketException
+	 */
+	protected DatagramSocket getSocket() 
+	throws SocketException {
+		if (socket == null) {
+			socket = new DatagramSocket();
+			socket.setSoTimeout(getSocketTimeout());
+		}
+		return socket;
 	}
 	
 	/**

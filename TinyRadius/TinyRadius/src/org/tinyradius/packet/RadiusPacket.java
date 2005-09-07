@@ -48,8 +48,17 @@ public class RadiusPacket {
 	public static final int PASSWORD_REJECT     = 9;
 	public static final int ACCOUNTING_MESSAGE  = 10;
 	public static final int ACCESS_CHALLENGE    = 11;
-	public static final int STATUS_SERVER       = 12;   // experimental
-	public static final int STATUS_CLIENT       = 13;   // experimental
+	public static final int STATUS_SERVER       = 12;
+	public static final int STATUS_CLIENT       = 13;
+	public static final int DISCONNECT_REQUEST  = 40;	// RFC 2882
+	public static final int DISCONNECT_ACK      = 41;
+	public static final int DISCONNECT_NAK      = 42;
+	public static final int COA_REQUEST         = 43;
+	public static final int COA_ACK             = 44;
+	public static final int COA_NAK             = 45;
+	public static final int STATUS_REQUEST      = 46;
+	public static final int STATUS_ACCEPT       = 47;
+	public static final int STATUS_REJECT       = 48;
 	public static final int RESERVED            = 255;
 
 	/**
