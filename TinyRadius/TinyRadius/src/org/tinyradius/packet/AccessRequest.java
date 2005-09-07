@@ -148,6 +148,8 @@ public class AccessRequest extends RadiusPacket {
 		if (userPassword != null) {
 			setAuthProtocol(AUTH_PAP);
 			this.password = decodePapPassword(userPassword.getAttributeData(), RadiusUtil.getUtf8Bytes(sharedSecret));
+			// copy truncated data
+			userPassword.setAttributeData(RadiusUtil.getUtf8Bytes(this.password));
 		} else if (chapPassword != null && chapChallenge != null) {
 			setAuthProtocol(AUTH_CHAP);
 			this.chapPassword = chapPassword.getAttributeData();
@@ -162,7 +164,9 @@ public class AccessRequest extends RadiusPacket {
 	 */
 	protected void encodeRequestAttributes(String sharedSecret) {
 		if (password == null || password.length() == 0)
-			throw new RuntimeException("no password set");
+			return;
+			// ok for proxied packets whose CHAP password is already encrypted
+			//throw new RuntimeException("no password set");
 		
 		if (getAuthProtocol().equals(AUTH_PAP)) {
 			byte[] pass = encodePapPassword(RadiusUtil.getUtf8Bytes(this.password), RadiusUtil.getUtf8Bytes(sharedSecret));

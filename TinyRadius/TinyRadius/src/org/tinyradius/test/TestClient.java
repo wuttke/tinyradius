@@ -38,12 +38,12 @@ public class TestClient {
 
 		// 1. Send Access-Request
 		AccessRequest ar = new AccessRequest(user, pass);
-		ar.setAuthProtocol(AccessRequest.AUTH_CHAP); // or AUTH_PAP
+		ar.setAuthProtocol(AccessRequest.AUTH_PAP); // or AUTH_CHAP
 		ar.addAttribute("NAS-Identifier", "this.is.my.nas-identifier.de");
 		ar.addAttribute("NAS-IP-Address", "192.168.0.100");
 		ar.addAttribute("Service-Type", "Login-User");
-		ar.addAttribute("Redirection-URL", "http://www.sourceforge.net/");
-		ar.addAttribute("Location-ID", "net.sourceforge.ap1");
+		ar.addAttribute("WISPr-Redirection-URL", "http://www.sourceforge.net/");
+		ar.addAttribute("WISPr-Location-ID", "net.sourceforge.ap1");
 		
 		System.out.println("Packet before it is sent\n" + ar + "\n");
 		RadiusPacket response = rc.authenticate(ar);

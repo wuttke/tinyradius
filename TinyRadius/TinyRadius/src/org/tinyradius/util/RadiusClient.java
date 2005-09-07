@@ -42,6 +42,14 @@ public class RadiusClient {
 	}
 	
 	/**
+	 * Constructs a Radius client for the given Radius endpoint.
+	 * @param client Radius endpoint
+	 */
+	public RadiusClient(RadiusEndpoint client) {
+		this(client.getEndpointAddress().getAddress().getHostAddress(), client.getSharedSecret());		
+	}
+	
+	/**
 	 * Authenticates a user.
 	 * @param userName user name
 	 * @param password password
@@ -254,6 +262,21 @@ public class RadiusClient {
         }
 		
 		return null;
+	}
+	
+	/**
+	 * Sends the specified packet to the specified Radius server endpoint.
+	 * @param remoteServer Radius endpoint consisting of server address,
+	 * port number and shared secret
+	 * @param request Radius packet to be sent 
+	 * @return received response packet
+	 * @throws RadiusException malformed packet
+	 * @throws IOException error while communication
+	 */
+	public static RadiusPacket communicate(RadiusEndpoint remoteServer, RadiusPacket request) 
+	throws RadiusException, IOException {
+		RadiusClient rc = new RadiusClient(remoteServer);
+		return rc.communicate(request, remoteServer.getEndpointAddress().getPort());
 	}
 
 	/**
