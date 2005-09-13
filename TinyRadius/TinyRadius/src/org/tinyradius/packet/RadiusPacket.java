@@ -154,6 +154,16 @@ public class RadiusPacket {
 		case ACCESS_CHALLENGE: return "Access-Challenge";
 		case STATUS_SERVER: return "Status-Server";
 		case STATUS_CLIENT: return "Status-Client";
+		// RFC 2882
+		case DISCONNECT_REQUEST: return "Disconnect-Request";	
+		case DISCONNECT_ACK: return "Disconnect-ACK";
+		case DISCONNECT_NAK: return "Disconnect-NAK";
+		case COA_REQUEST: return "CoA-Request";
+		case COA_ACK: return "CoA-ACK";
+		case COA_NAK: return "CoA-NAK";
+		case STATUS_REQUEST: return "Status-Request";
+		case STATUS_ACCEPT: return "Status-Accept";
+		case STATUS_REJECT: return "Status-Reject";
 		case RESERVED: return "Reserved";
 		default: return "Unknown (" + getPacketType() + ")";
 		}
