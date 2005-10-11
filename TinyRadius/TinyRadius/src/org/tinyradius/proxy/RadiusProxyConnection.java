@@ -1,7 +1,7 @@
 /**
  * $Id$
  * Created on 07.09.2005
- * @author Matthias Wuttke
+ * @author glanz, Matthias Wuttke
  * @version $Revision$
  */
 package org.tinyradius.proxy;
