@@ -19,5 +19,7 @@ public class RadiusException extends Exception {
 	public RadiusException(String message) {
 		super(message);
 	}
-	
+
+	private static final long serialVersionUID = 2201204523946051388L;
+
 }

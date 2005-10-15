@@ -870,7 +870,6 @@ public class RadiusPacket {
 		rp.authenticator = authenticator;
 		
 		// load attributes
-		ArrayList attributes = new ArrayList(attributeCount);
 		pos = 0;
 		while (pos < attributeData.length) {
 			int attributeType = attributeData[pos] & 0x0ff;
