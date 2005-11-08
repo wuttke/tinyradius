@@ -63,7 +63,7 @@ public class TestServer {
 		
 		System.out.println("Server started.");
 		
-		Thread.sleep(1000*3000);
+		Thread.sleep(1000*10);
 		System.out.println("Stop server (3000 s expired)");
 		server.stop();
 	}

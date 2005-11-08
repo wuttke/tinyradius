@@ -127,6 +127,7 @@ public abstract class RadiusServer {
 	 */
 	public void stop() {
 		logger.info("stopping Radius server");
+		closing = true;
 		if (authSocket != null)
 			authSocket.close();
 		if (acctSocket != null)
@@ -288,8 +289,14 @@ public abstract class RadiusServer {
 				try {
 					s.receive(packetIn);
 				} catch (SocketException se) {
-					// end thread
-					return;
+					if (closing) {
+						// end thread
+						return;
+					} else {
+						// retry s.receive()
+						logger.error("SocketException during s.receive() -> retry", se);
+						continue;
+					}
 				}
 				
 				// check client
@@ -477,6 +484,7 @@ public abstract class RadiusServer {
 	private int socketTimeout = 3000;
 	private List receivedPackets = new LinkedList();
 	private long duplicateInterval = 30000; // 30 s
+	private boolean closing = false;
 	private static Log logger = LogFactory.getLog(RadiusServer.class);
 	
 }
