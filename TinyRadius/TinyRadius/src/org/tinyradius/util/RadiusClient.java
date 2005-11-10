@@ -13,6 +13,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.net.SocketTimeoutException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -249,8 +250,12 @@ public class RadiusClient {
 				return makeRadiusPacket(packetIn, request);
 			} catch (IOException ioex) {
 				if (i == getRetryCount()) {
-					if (logger.isErrorEnabled())
-						logger.error("communication failure, no more retries", ioex);
+					if (logger.isErrorEnabled()) {
+						if (ioex instanceof SocketTimeoutException)
+							logger.error("communication failure (timeout), no more retries");
+						else
+							logger.error("communication failure, no more retries", ioex);
+					}
 					throw ioex;
 				}
 				if (logger.isInfoEnabled())
