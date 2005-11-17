@@ -18,7 +18,7 @@ TinyRadius build file
 	</target>
 	
 	<target name="compile" depends="init">
-        <javac srcdir="${src}" destdir="${build}" classpath="${classpath}"/>
+        <javac srcdir="${src}" destdir="${build}" classpath="${classpath}" debug="true"/>
     </target>
 
     <target name="jar" depends="compile">
