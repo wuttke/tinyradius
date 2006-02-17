@@ -884,6 +884,7 @@ public class RadiusPacket {
 		if (request == null) {
 			// decode attributes
 			rp.decodeRequestAttributes(sharedSecret);
+			rp.checkRequestAuthenticator(sharedSecret, length, attributeData);
 		} else {
 			// response packet: check authenticator
 			rp.checkResponseAuthenticator(sharedSecret, length, attributeData, request.getAuthenticator());
@@ -892,6 +893,19 @@ public class RadiusPacket {
 		return rp;
 	}
 	
+	/**
+	 * Checks the request authenticator against the supplied shared secret.
+	 * Overriden by AccountingRequest to handle special accounting request
+	 * authenticators. There is no way to check request authenticators for
+	 * authentication requests as they contain secret bytes.
+	 * @param sharedSecret shared secret
+	 * @param packetLength total length of the packet
+	 * @param attributes request attribute data
+	 */
+	protected void checkRequestAuthenticator(String sharedSecret, int packetLength, byte[] attributes)
+	throws RadiusException {
+	}
+
 	/**
 	 * Can be overriden to decode encoded request attributes such as
 	 * User-Password. This method may use getAuthenticator() to get the

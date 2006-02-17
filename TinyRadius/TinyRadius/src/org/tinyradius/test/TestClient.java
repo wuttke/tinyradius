@@ -49,7 +49,7 @@ public class TestClient {
 		RadiusPacket response = rc.authenticate(ar);
 		System.out.println("Packet after it was sent\n" + ar + "\n");
 		System.out.println("Response\n" + response + "\n");
-		
+
 		// 2. Send Accounting-Request
 		AccountingRequest acc = new AccountingRequest("mw", AccountingRequest.ACCT_STATUS_TYPE_START);
 		acc.addAttribute("Acct-Session-Id", "1234567890");

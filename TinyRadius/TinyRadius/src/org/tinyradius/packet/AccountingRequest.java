@@ -139,6 +139,17 @@ public class AccountingRequest extends RadiusPacket {
 	}
 	
 	/**
+	 * Checks the received request authenticator as specified by RFC 2866.
+	 */
+	protected void checkRequestAuthenticator(String sharedSecret, int packetLength, byte[] attributes) throws RadiusException {
+		byte[] expectedAuthenticator = updateRequestAuthenticator(sharedSecret, packetLength, attributes);
+		byte[] receivedAuth = getAuthenticator();
+		for (int i = 0; i < 16; i++)
+			if (expectedAuthenticator[i] != receivedAuth[i])
+				throw new RadiusException("request authenticator invalid");
+	}
+	
+	/**
 	 * Radius User-Name attribute type
 	 */
 	private static final int USER_NAME = 1;

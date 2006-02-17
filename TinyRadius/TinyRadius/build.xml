@@ -9,7 +9,7 @@ TinyRadius build file
 	<property name="src" location="src"/>
 	<property name="build" location="build"/>
 	<property name="dist" location="dist"/>
-	<property name="version" value="0.9.6"/>
+	<property name="version" value="0.9.7"/>
 	<property name="classpath" value="lib/commons-logging.jar"/>
 	
 	<target name="init">
