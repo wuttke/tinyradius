@@ -834,9 +834,9 @@ public class RadiusPacket {
 			throw new RuntimeException("request authenticator not set");
 
 		// read and check header
-		int type = in.read();
-		int identifier = in.read();
-		int length = in.read() << 8 | in.read();
+		int type = in.read() & 0x0ff;
+		int identifier = in.read() & 0x0ff;
+		int length = (in.read() & 0x0ff) << 8 | (in.read() & 0x0ff);
 	
 		if (request != null && request.getPacketIdentifier() != identifier)
 			throw new RadiusException("bad packet: invalid packet identifier (request: " + request.getPacketIdentifier() + ", response: " + identifier);
