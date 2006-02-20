@@ -152,8 +152,8 @@ public class RadiusAttribute {
 	throws RadiusException {
 		if (length < 2)
 			throw new RadiusException("attribute length too small: " + length);
-		int attrType = data[offset];
-		int attrLen = data[offset + 1];
+		int attrType = data[offset] & 0x0ff;
+		int attrLen = data[offset + 1] & 0x0ff;
 		byte[] attrData = new byte[attrLen - 2];
 		System.arraycopy(data, offset + 2, attrData, 0, attrLen - 2);
 		setAttributeType(attrType);
