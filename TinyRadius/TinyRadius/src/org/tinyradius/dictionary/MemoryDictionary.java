@@ -43,7 +43,10 @@ implements WritableDictionary {
 	 */
 	public AttributeType getAttributeTypeByCode(int vendorCode, int typeCode) {
 		Map vendorAttributes = (Map)attributesByCode.get(new Integer(vendorCode));
-		return (AttributeType)vendorAttributes.get(new Integer(typeCode));
+		if (vendorAttributes == null)
+			return null;
+		else
+			return (AttributeType)vendorAttributes.get(new Integer(typeCode));
 	}
 	
 	/**
