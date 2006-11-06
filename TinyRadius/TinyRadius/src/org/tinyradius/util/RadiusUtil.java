@@ -49,12 +49,13 @@ public class RadiusUtil {
 	 */
 	public static String getHexString(byte[] data) {
 		StringBuffer hex = new StringBuffer("0x");
-		for (int i = 0; i < data.length; i++) {
-			String digit = Integer.toString(data[i] & 0x0ff, 16);
-			if (digit.length() < 2)
-				hex.append('0');
-			hex.append(digit);
-		}
+		if (data != null)
+			for (int i = 0; i < data.length; i++) {
+				String digit = Integer.toString(data[i] & 0x0ff, 16);
+				if (digit.length() < 2)
+					hex.append('0');
+				hex.append(digit);
+			}
 		return hex.toString();
 	}
 	
