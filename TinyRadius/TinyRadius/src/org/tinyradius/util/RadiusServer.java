@@ -69,7 +69,7 @@ public abstract class RadiusServer {
 		
 		RadiusPacket answer = new RadiusPacket(type, accessRequest.getPacketIdentifier());
 		copyProxyState(accessRequest, answer);
-		return answer; 
+		return answer;
 	}
 	
 	/**
@@ -298,15 +298,14 @@ public abstract class RadiusServer {
 			try {
 				// receive packet
 				try {
-					logger.debug("about to call socket.receive");
+					logger.trace("about to call socket.receive()");
 					s.receive(packetIn);
-					if (logger.isDebugEnabled()) {
-						logger.debug("return from blocking socket.receive call");
+					if (logger.isDebugEnabled())
 						logger.debug("receive buffer size = " + s.getReceiveBufferSize());
-					}
 				} catch (SocketException se) {
 					if (closing) {
 						// end thread
+						logger.info("got closing signal - end listen thread");
 						return;
 					} else {
 						// retry s.receive()
@@ -331,6 +330,7 @@ public abstract class RadiusServer {
 					logger.info("received packet from " + remoteAddress + " on local address " + localAddress + ": " + request);
 
 				// handle packet
+				logger.trace("about to call RadiusServer.handlePacket()");
 				RadiusPacket response = handlePacket(localAddress, remoteAddress, request, secret);
 				
 				// send response
@@ -343,7 +343,7 @@ public abstract class RadiusServer {
 					logger.info("no response sent");						
 			} catch (SocketTimeoutException ste) {
 				// this is expected behaviour
-				logger.debug("normal socket timeout");
+				logger.trace("normal socket timeout");
 			} catch (IOException ioe) {
 				// error while reading/writing socket
 				logger.error("communication error", ioe);
