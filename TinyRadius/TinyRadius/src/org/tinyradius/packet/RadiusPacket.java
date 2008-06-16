@@ -857,7 +857,10 @@ public class RadiusPacket {
 		while (pos < attributeData.length) {
 			if (pos + 1 >= attributeData.length)
 				throw new RadiusException("bad packet: attribute length mismatch");
-			pos += attributeData[pos + 1] & 0x0ff;
+			int attributeLength = attributeData[pos + 1] & 0x0ff;
+			if (attributeLength < 2)
+				throw new RadiusException("bad packet: invalid attribute length");
+			pos += attributeLength;
 			attributeCount++;
 		}
 		if (pos != attributeData.length)
