@@ -156,6 +156,11 @@ public class AccessRequest extends RadiusPacket {
 			setAuthProtocol(AUTH_CHAP);
 			this.chapPassword = chapPassword.getAttributeData();
 			this.chapChallenge = chapChallenge.getAttributeData();
+		} else if (chapPassword != null && getAuthenticator().length == 16) {
+			// thanks to Guillaume Tartayre
+            setAuthProtocol(AUTH_CHAP);
+            this.chapPassword = chapPassword.getAttributeData();
+            this.chapChallenge = getAuthenticator();
 		} else
 			throw new RadiusException("Access-Request: User-Password or CHAP-Password/CHAP-Challenge missing");
 	}
